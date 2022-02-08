@@ -1,0 +1,16 @@
+name: OK to test enable actions
+
+on:
+  pull_request:
+    types: [labeled]
+    branches: [ 'main', 'master', 'release-*' ]
+
+jobs:
+  check-ok-to-test:
+    name: Check ok-to-test label
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check ok-to-test label
+      shell: bash
+      run: |
+        echo ${{ github.ref_name }}
