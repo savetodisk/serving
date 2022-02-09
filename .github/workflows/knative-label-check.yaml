@@ -25,4 +25,4 @@ jobs:
       shell: bash
       run: |
         set -x
-        echo actions response = '${{ fromJSON(env.branch_actions_response).workflow_runs.*.head_sha }}'
+        echo actions response = '${{ toJSON(fromJSON(env.branch_actions_response).workflow_runs.*.head_sha) }}'
