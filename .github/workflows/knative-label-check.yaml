@@ -17,7 +17,7 @@ jobs:
       run: |
         set -x
         RUNS_URL='${{ github.event.repository.url }}/actions/runs?branch=${{ github.event.pull_request.head.ref }}&status=action_required&event=pull_request'
-        gh api --jq '.workflow_runs.[] | select(.head_sha == "${{ github.event.pull_request.head.sha }}").url + "/approve"' $RUNS_URL | xargs gh api -XPOST
+        gh api --jq '.workflow_runs.[] | select(.head_sha == "${{ github.event.pull_request.head.sha }}").url + "/approve"' $RUNS_URL | xargs -L1 gh api -XPOST
         echo 'branch_actions_response<<EOF' >> $GITHUB_ENV
         curl "$RUNS_URL" >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
