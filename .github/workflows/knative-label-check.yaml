@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Curl runs to approve
       shell: bash
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
         set -x
         RUNS_URL='${{ github.event.repository.url }}/actions/runs?branch=${{ github.event.pull_request.head.ref }}&status=action_required&event=pull_request'
