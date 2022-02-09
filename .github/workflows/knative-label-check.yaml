@@ -17,15 +17,10 @@ jobs:
       run: |
         set -x
         RUNS_URL='${{ github.event.repository.url }}/actions/runs?branch=${{ github.event.pull_request.head.ref }}&status=action_required&event=pull_request'
-        gh api --jq '.workflow_runs.[] | select(.head_sha == "${{ github.event.pull_request.head.sha }}").url + "/approve"' $RUNS_URL
+        gh api --jq '.workflow_runs.[] | select(.head_sha == "${{ github.event.pull_request.head.sha }}").url + "/approve"' $RUNS_URL | xargs gh api -XPOST
         echo 'branch_actions_response<<EOF' >> $GITHUB_ENV
         curl "$RUNS_URL" >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
         echo head sha '${{ github.event.pull_request.head.sha }}'
         echo '${{ github.ref }}'
         echo '${{ github.event.label.name }}'
-    - name: Process runs payload
-      shell: bash
-      run: |
-        set -x
-        echo actions response = '${{ toJSON(fromJSON(env.branch_actions_response).workflow_runs.*.head_sha) }}'
