@@ -9,6 +9,8 @@ jobs:
   check-ok-to-test:
     name: Check ok-to-test label
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
     steps:
     - name: Curl runs to approve
       shell: bash
