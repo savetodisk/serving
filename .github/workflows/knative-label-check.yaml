@@ -10,14 +10,21 @@ jobs:
     name: Check ok-to-test label
     runs-on: ubuntu-latest
     steps:
-    - name: Check ok-to-test label
+    - name: Curl runs to approve
       shell: bash
       run: |
         set -x
-        echo runs url = '${{ github.event.repository.url }}/actions/runs?branch=${{ github.event.pull_request.head.ref }}&status=action_required&event=pull_request'
+        RUNS_URL='${{ github.event.repository.url }}/actions/runs?branch=${{ github.event.pull_request.head.ref }}&status=action_required&event=pull_request'
+        echo 'branch_actions_response<<EOF' >> $GITHUB_ENV
+        curl "$RUNS_URL" >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
         echo head sha '${{ github.event.pull_request.head.sha }}'
         echo '${{ github.ref }}'
-        echo '${{ github.api_url }}'
         echo '${{ github.event.label.name }}'
         echo '${{ toJSON(github.event) }}'
         echo '${{ toJSON(github) }}'
+    - name: Process runs payload
+      shell: bash
+      run: |
+        set -x
+        echo actions response = ${{ env.branch_actions_response }} 
