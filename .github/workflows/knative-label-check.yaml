@@ -14,7 +14,8 @@ jobs:
       shell: bash
       run: |
         set -x
-        echo '${{ github.ref_name }}'
+        echo runs url = '${{ github.repository.url }}/actions/runs?branch=${{ github.head.ref }}&status=action_required&event=pull_request'
+        echo '${{ github.head.sha }}'
         echo '${{ github.ref }}'
         echo '${{ github.api_url }}'
         echo '${{ github.event.label.name }}'
