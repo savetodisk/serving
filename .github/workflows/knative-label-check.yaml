@@ -13,4 +13,8 @@ jobs:
     - name: Check ok-to-test label
       shell: bash
       run: |
+        set -x
         echo ${{ github.ref_name }}
+        echo ${{ github.ref }}
+        echo ${{ github.api_url }}
+        echo ${{ github.event }}
