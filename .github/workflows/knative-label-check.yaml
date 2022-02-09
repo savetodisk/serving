@@ -21,8 +21,6 @@ jobs:
         echo head sha '${{ github.event.pull_request.head.sha }}'
         echo '${{ github.ref }}'
         echo '${{ github.event.label.name }}'
-        #echo '${{ toJSON(github.event) }}'
-        #echo '${{ toJSON(github) }}'
     - name: Process runs payload
       shell: bash
       run: |
