@@ -27,4 +27,4 @@ jobs:
       shell: bash
       run: |
         set -x
-        echo actions response = ${{ env.branch_actions_response }} 
+        echo actions response = '${{ fromJSON(env.branch_actions_response).workflow_runs.*.head_sha }}'
