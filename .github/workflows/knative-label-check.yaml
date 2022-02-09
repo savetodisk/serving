@@ -14,8 +14,8 @@ jobs:
       shell: bash
       run: |
         set -x
-        echo ${{ github.ref_name }}
-        echo ${{ github.ref }}
-        echo ${{ github.api_url }}
-        echo ${{ toJSON(github.event) }}
-        echo ${{ toJSON(github) }}
+        echo '${{ github.ref_name }}'
+        echo '${{ github.ref }}'
+        echo '${{ github.api_url }}'
+        echo '${{ toJSON(github.event) }}'
+        echo '${{ toJSON(github) }}'
